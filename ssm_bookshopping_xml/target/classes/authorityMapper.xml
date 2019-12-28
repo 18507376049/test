@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="authority.crud">
+    <select id="" resultMap="authoritymap">
+        select * from userinfo ui
+	      inner join sys_user_role su
+		    on ui.user_no=su.user_no
+	      inner join sys_role sr
+		    on sr.role_no = su.role_no
+	      inner join sys_role_authority sra
+		    on sr.role_no=sra.role_no
+	      inner join sys_authority sa
+		    on sa.auth_no=sra.role_auth_no
+	      where ui.user_no=#{}
+	</select>
+    <!--<resultMap id="authoritymap">-->
+        <!--<id column="auth_no" property="authNo"/>-->
+        <!--<result column="auth_name" property="authName"/>-->
+        <!--<result column="auth_parent_no" property="authParentNo"/>-->
+        <!--<result column="auth_img" property="authImg"/>-->
+        <!--<result column="auth_url" property="authUrl"/>-->
+        <!--<result column="auth_desc" property="authDesc"/>-->
+        <!--&lt;!&ndash;<result column="auth_order_number" property="authOrderNumber"/>&ndash;&gt;-->
+    <!--</resultMap>-->
+</mapper>
