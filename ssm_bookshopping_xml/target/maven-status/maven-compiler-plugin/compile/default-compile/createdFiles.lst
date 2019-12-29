@@ -1,9 +1,0 @@
-com\bookshopping\dao\UserInfoDaoInter.class
-com\bookshopping\dao\UserInfoDaoImpl.class
-com\bookshopping\action\BookTypeInfoManager.class
-com\bookshopping\pojo\Role.class
-com\bookshopping\pojo\UserInfo.class
-com\bookshopping\dao\AuthorityManagerDaoImpl.class
-com\bookshopping\pojo\BookTypeInfo.class
-com\bookshopping\pojo\Authority.class
-com\bookshopping\dao\AuthorityManagerDaoInter.class
