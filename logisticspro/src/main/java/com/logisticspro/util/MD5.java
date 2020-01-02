@@ -1,6 +1,5 @@
 package com.logisticspro.util;
 
-import com.medicine.pojo.Employees;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 

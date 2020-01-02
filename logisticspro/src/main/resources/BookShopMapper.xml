@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book.shopping.manager">
+    <!--1、根据图书的编号查询返回图书的单价-->
+    <select id="findBookPriceByIsbn" parameterType="int" resultType="int">
+      select bookPrice from book where isbn = #{bookIsbn}
+    </select>
+
+    <!--2、根据图书编号减少图书库存-->
+    <update id="updateBookStockByIsbn" parameterType="int">
+      update bookstock set stock = stock - 1 where isbn = #{bookIsbn}
+    </update>
+
+    <!--3、根据帐户名称与图书单价减少帐户余额: 余额 = 原余额 - 支付的图书价格 -->
+    <update id="updateUserBalance" parameterType="account">
+        update account set userBalance = userBalance - #{userBalance} where userName = #{userName}
+    </update>
+
+    <!--4、根据图书编号查询当前图书库存数-->
+    <select id="findBookStockByIsbn" parameterType="int" resultType="int">
+        select stock from bookstock where isbn = #{bookIsbn}
+    </select>
+
+    <!--5、根据帐户名称查询当前帐户的余额-->
+    <select id="findUserBalanceByUserName" parameterType="string" resultType="int">
+        select userBalance from account where userName = #{username}
+    </select>
+</mapper>
