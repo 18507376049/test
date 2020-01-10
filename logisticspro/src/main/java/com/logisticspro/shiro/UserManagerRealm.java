@@ -1,14 +1,11 @@
 package com.logisticspro.shiro;
 
-
-
+import com.logisticspro.pojo.Authority;
+import com.logisticspro.pojo.Employees;
 import com.logisticspro.service.impl.UserManagerServiceImpl;
 import com.logisticspro.service.inter.UserManagerServiceInter;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -16,8 +13,6 @@ import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import com.logisticspro.pojo.Employees;
-
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -48,7 +43,7 @@ public class UserManagerRealm extends AuthenticatingRealm {
         //2.获取token中的登录账户
         String userCode = userToken.getUsername();
         Employees employee = new Employees();
-        employee.setUserName(userCode);
+        employee.setEmpUserName(userCode);
         //3.查询数据库，是否存在指定的用户名和密码的用户(主键/账户/密码/账户状态/盐)
         Employees employees =null;
         employees = userManagerServiceInter.getEmplInfoByLoginInfo(employee);
@@ -61,11 +56,11 @@ public class UserManagerRealm extends AuthenticatingRealm {
             session.setAttribute("Employees_Info",employees);
         }
         //4.2 如果查询到了，封装查询结果
-        Object principal = employees.getUserName();
-        Object credentials = employees.getUserPass();
+        Object principal = employees.getEmpUserName();
+        Object credentials = employees.getEmpUserPass();
         String realmName = this.getName();
         //盐为用户的用户名
-        String salt = employees.getUserName();
+        String salt = employees.getEmpUserName();
         //获取盐，用于对密码在加密算法(MD5)的基础上二次加密ֵ
         ByteSource byteSalt = ByteSource.Util.bytes(salt);
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(principal, credentials, byteSalt, realmName);
