@@ -30,7 +30,7 @@
         3.配置UserManagerRealm
         3.1 写一个类实现Realm接口的bean
     -->
-    <bean id="jdbcRealm" class="com.medicine.shiro.UserManagerRealm">
+    <bean id="jdbcRealm" class="com.logisticspro.shiro.UserManagerRealm">
         <!--配置Realm中的加密，包括用户的密码加密，和数据库的密码加密-->
         <property name="credentialsMatcher">
             <!--处理密码-->
@@ -94,6 +94,6 @@
         <!--<property name="filt/erChainDefinitionMap" ref="filterChainDefinitionMap"/>-->
     </bean>
     <!--将bean配置为一个工厂实例-->
-    <bean id="filterChainDefinitionMap" factory-bean="filterChainDefinitionsBuilder" factory-method="builderFilterChainDefinitions"/>
-    <bean id="filterChainDefinitionsBuilder" class="com.medicine.factory.FilterChainDefinitionsBuilder"/>
+    <!--<bean id="filterChainDefinitionMap" factory-bean="filterChainDefinitionsBuilder" factory-method="builderFilterChainDefinitions"/>-->
+    <!--<bean id="filterChainDefinitionsBuilder" class="com.medicine.factory.FilterChainDefinitionsBuilder"/>-->
 </beans>
