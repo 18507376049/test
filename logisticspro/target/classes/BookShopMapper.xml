@@ -13,10 +13,10 @@
       update bookstock set stock = stock - 1 where isbn = #{bookIsbn}
     </update>
 
-    <!--3、根据帐户名称与图书单价减少帐户余额: 余额 = 原余额 - 支付的图书价格 -->
-    <update id="updateUserBalance" parameterType="account">
-        update account set userBalance = userBalance - #{userBalance} where userName = #{userName}
-    </update>
+    <!--&lt;!&ndash;3、根据帐户名称与图书单价减少帐户余额: 余额 = 原余额 - 支付的图书价格 &ndash;&gt;-->
+    <!--<update id="updateUserBalance" parameterType="account">-->
+        <!--update account set userBalance = userBalance - #{userBalance} where userName = #{userName}-->
+    <!--</update>-->
 
     <!--4、根据图书编号查询当前图书库存数-->
     <select id="findBookStockByIsbn" parameterType="int" resultType="int">

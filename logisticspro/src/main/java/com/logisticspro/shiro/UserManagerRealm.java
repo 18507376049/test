@@ -123,7 +123,7 @@ public class UserManagerRealm extends AuthenticatingRealm {
 //          加密的密码
         String credentials = "1234";
 //          盐值
-        Object salt = ByteSource.Util.bytes("wang");
+        Object salt = ByteSource.Util.bytes("mang");
 //          加密的次数
         int hashIterations = 1024;
         SimpleHash simpleHash = new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations);

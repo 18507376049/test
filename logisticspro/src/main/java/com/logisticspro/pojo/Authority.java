@@ -1,5 +1,7 @@
 package com.logisticspro.pojo;
 
+import java.util.List;
+
 /**
  * @Auther: 刘涵
  * @Date: 2020-01-10 11:06
@@ -46,6 +48,15 @@ public class Authority {
     * 状态
     */
    private int autStatus = 0;
+   private List<Authority> authority;
+
+   public List<Authority> getAuthority() {
+      return authority;
+   }
+
+   public void setAuthority(List<Authority> authority) {
+      this.authority = authority;
+   }
 
    public Authority() {
    }
