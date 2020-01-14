@@ -7,13 +7,12 @@
     <style>
         h3 {
             font-weight: bold;
-            padding: 10px;
             width: 240px;
             text-align: center;
         }
 
         .center {
-            width: 1000px;
+            width: 1050px;
             height: 410px;
             border: 1px solid gainsboro;
             padding: 10px;
@@ -28,7 +27,7 @@
 
         .rightStyle {
             height: 420px;
-            width: 1060px;
+            width: 1080px;
         }
 
         .right {
@@ -54,7 +53,6 @@
     </script>
     <script src="layui/layui.all.js"></script>
     <script src="JQuery/jquery-3.4.1.min.js"></script>
-    <script src="js/authority.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="button" style="display: none;">
@@ -145,7 +143,7 @@
         <div class=" layui-form-item">
             <label class="layui-form-label">描述：</label>
             <div class="layui-input-inline">
-                <textarea name="rolDesc" required lay-verify="required" placeholder="请输入"
+                <textarea name="rolDesc"  placeholder="请输入"
                           class="layui-textarea"></textarea>
             </div>
         </div>
@@ -193,7 +191,7 @@
         <div class=" layui-form-item">
             <label class="layui-form-label">描述：</label>
             <div class="layui-input-inline">
-                <textarea name="autDesc" required lay-verify="required" placeholder="请输入"
+                <textarea name="autDesc"  placeholder="请输入"
                           class="layui-textarea"></textarea>
             </div>
         </div>
@@ -252,7 +250,7 @@
             }
             , page: true //开启分页
             , height: 400
-            , width: 1120
+            , width: 1050
         });
 
         //获得权限信息
@@ -286,8 +284,8 @@
                 };
             }
             , page: true //开启分页
-            , height: 340
-            , width: 1120
+            , height: 400
+            , width: 1050
 
         });
 
@@ -373,6 +371,12 @@
                         , title: '创建角色'
                         , content: $('#addRolesFrom') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                         , area: ['400px', '450px']
+                        ,cancel: function(index, layero){
+                            $('#addRolesFrom').css({"display":"none"});
+                            $('#addAuthorityFrom').css({"display":"none"});
+                            layer.close(layer.index);
+                            return false;
+                        }
                     });
 
                     //3.点击提交按钮
@@ -435,6 +439,11 @@
                             , title: '修改角色'
                             , content: $('#addRolesFrom') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                             , area: ['400px', '450px']
+                            ,cancel: function(index, layero){
+                                $('#addRolesFrom').css({"display":"none"});
+                                $('#addAuthorityFrom').css({"display":"none"});
+                                layer.close(layer.index);
+                                return false;}
                         });
 
                         //3.点击提交按钮
@@ -519,6 +528,11 @@
                         , title: '新建权限'
                         , content: $('#addAuthorityFrom') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                         , area: ['400px', '450px']
+                        ,cancel: function(index, layero){
+                            $('#addRolesFrom').css({"display":"none"});
+                            $('#addAuthorityFrom').css({"display":"none"});
+                            layer.close(layer.index);
+                            return false;}
                     });
 
                     //3.加载父级权限自动获取下拉框
@@ -539,7 +553,7 @@
 
                     $('#authoritySubmit').click(function () {
                         isChoose();
-                        data.autStatus = $('#autStatus').val();
+                        // data.autStatus = $('#autStatus').val();
                         //获得当前输入的权限名称
                         var authorityName = $("#autName").val();
                         //获得选择的父类
@@ -607,6 +621,8 @@
                                         //关闭窗体，并提示
                                         layer.close(index);
                                         layer.msg('添加成功');
+                                        layui.form.render();
+                                        location.reload();
                                     } else {
                                         //不关闭窗体，并提示
                                         layer.msg('添加失败');
@@ -658,6 +674,11 @@
                             , title: '创建权限'
                             , content: $('#addAuthorityFrom') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
                             , area: ['400px', '450px']
+                            ,cancel: function(index, layero){
+                                $('#addRolesFrom').css({"display":"none"});
+                                $('#addAuthorityFrom').css({"display":"none"});
+                                layer.close(layer.index);
+                                return false;}
                         });
                         //3.点击提交
                         $('#authoritySubmit').click(function () {
@@ -683,6 +704,8 @@
                                         //关闭窗体，并提示
                                         layer.close(index3);
                                         layer.msg('添加成功');
+                                        layui.form.render();
+                                        location.reload();
                                     } else {
                                         //不关闭窗体，并提示
                                         layer.msg('添加失败');
@@ -708,6 +731,8 @@
                                     //获得提交后的返回值,并判断是否成功新增数据
                                     if (data == "succeed") {
                                         layer.msg('设置成功');
+                                        layui.form.render();
+                                        location.reload();
                                     } else {
                                         //不关闭窗体，并提示
                                         layer.msg('设置失败');
@@ -720,9 +745,8 @@
                     break;
             }
             // 结束时清空表单内容
-            $("#addAuthorityFrom")[0].reset();
-            layui.form.render();
-            location.reload();
+            // $("#addAuthorityFrom")[0].reset();
+
         });
 
         var employees = [];

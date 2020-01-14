@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="maxNoManager.crud">
+
+    <!--查询最大编号表的最大编号-->
+    <select id="searchMaxNo" parameterType="maxNo" resultType="maxNo">
+        select manID,manTableName,manMaxNo,manQu,manRemark,manPre,manSt from  max_no
+          where manTableName=#{manTableName}
+          <if test="null != manQu">
+              and manQu =#{manQu}
+          </if>
+    </select>
+
+    <!--修改最大编号表的最大编号-->
+    <update id="excuteUpdateMaxNo" parameterType="maxNo">
+        update max_no set manMaxNo = #{manMaxNo}
+        where manTableName=#{manTableName}
+        <if test="null != manQu">
+            and manQu =#{manQu}
+        </if>
+    </update>
+
+</mapper>

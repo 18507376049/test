@@ -1,4 +1,4 @@
-package com.logisticspro.util;
+package com.logisticspro.pojo;
 
 /**
  * @Auther: 刘涵

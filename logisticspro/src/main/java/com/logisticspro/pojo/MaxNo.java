@@ -34,7 +34,11 @@ public class MaxNo {
     */
    private String manSt;
 
-   public MaxNo() {
+    public MaxNo() {
+   }
+
+   public MaxNo(String manTableName) {
+      this.manTableName = manTableName;
    }
 
    public MaxNo(String manID, String manTableName, String manMaxNo, int manQu, String manRemark, String manPre, String manSt) {

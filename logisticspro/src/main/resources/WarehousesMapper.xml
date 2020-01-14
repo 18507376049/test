@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="warehouses.crud">
+    <!--查询出库表warehouse总条数-->
+    <select id="countnum" resultType="int">
+        select count(*) from warehouse
+    </select>
+    <!--分页查询，相关表仓库表warehouse，员工中间表employees_role，员工表employees，地址表address，省province，市city，区district，然后根据编号进行分组-->
+    <select id="searchwarehousemapList" resultMap="warehousemap" parameterType="page">
+        select warID,warName, empName employeesNo ,warPhone,
+        addDetail warAddress ,warDefault,warForbidNo,warTotalValue,
+        repNumber,warCurrent,warLowest ,empNo,addId,addProvinceNo,addCityNo,addDistrictNo from warehouse
+        inner join employees on warehouse.employeesNo=employees.empNo
+        inner join address on address.addId=warehouse.warAddress
+        <if test="page!=null and limit!=null">
+            limit #{page},#{limit}
+        </if>
+    </select>
+    <!--查询仓库负责人相关表，仓库表warehouse，员工中间表employees_role，员工表employees，角色表role，通过员工编号进行分组-->
+    <select id="searchwarehouseempName" resultType="employees">
+           select * from employees
+               where empNo in (select distinct(empNo) from employees
+            inner join unit on empUnitNo=uniId
+            where empUnitNo='U0001')
+
+    </select>
+    <!--新增仓库表warehouse数据-->
+    <select id="warehouseInsert" resultMap="warehousemap" parameterType="Warehouse">
+        insert into warehouse(warID,warName,employeesNo,warPhone,warAddress,warDefault,warForbidNo,warComment,repNumber,warTotalValue,warLowest)
+        VALUES(#{warID},#{warName},#{employeesNo},#{warPhone},#{warAddress},#{warDefault},#{warForbidNo},#{warComment},#{repNumber},#{warTotalValue},#{warLowest})
+    </select>
+    <!--删除仓库表warehouse，一条或多条数据，以主键编号为条件-->
+    <select id="warehouseDelete" resultMap="warehousemap" parameterType="String">
+      delete from warehouse where warID in
+        <foreach item="warID" collection="array" index="no" open="(" separator="," close=")">
+            #{warID}
+        </foreach>
+    </select>
+    <!--编辑仓库表warehouse任意数据，以主键编号为条件-->
+    <select id="warehouseUpdate" resultMap="warehousemap" parameterType="Warehouse">
+        UPDATE warehouse SET warName = #{warName},employeesNo = #{employeesNo}, warPhone = #{warPhone}, warAddressNo = #{warAddressNo}, warAddress = #{warAddress}, warDefault = #{warDefault}, warForbidNo = #{warForbidNo}, warComment = #{warComment}, repNumber = #{repNumber}, warTotalValue = #{warTotalValue}, warCurrent = #{warCurrent}, warLowest = #{warLowest}
+         WHERE warID = #{warID}
+    </select>
+    <!-- 挑选全部的province省份信息 -->
+    <select id="warehouseAllprovince"  parameterType="String" resultType="proArea">
+        select * from proarea where proLevel=1
+    </select>
+
+    <!-- 挑选全部的city城市信息，以省编号为条件 -->
+    <select id="warehouseAllCity" parameterType="String"  resultType="proArea">
+        select * from proarea where proParenetNo=#{proParenetNo}
+    </select>
+
+    <!-- 挑选全部的district区信息，以市编号为条件 -->
+    <select id="warehouseAllArea"  parameterType="String" resultType="proArea" >
+        select * from proarea where proParenetNo=#{proParenetNo}
+    </select>
+
+    <insert id="insertAddress" parameterType="address">
+      insert into address(addId,addProvinceNo,addCityNo,addDistrictNo,addDetail)
+        values(#{addId},#{addProvinceNo},#{addCityNo},#{addDistrictNo},#{addDetail})
+    </insert>
+    <resultMap id="warehousemap" type="Warehouse">
+        <id column="warID" property="warID"/>
+        <result column="warName" property="warName"/>
+        <result column="employeesNo" property="employeesNo"/>
+        <result column="warPhone" property="warPhone"/>
+        <result column="warAddressNo" property="warAddressNo"/>
+        <result column="warAddress" property="warAddress"/>
+        <result column="warDefault" property="warDefault"/>
+        <result column="warForbidNo" property="warForbidNo"/>
+        <result column="warComment" property="warComment"/>
+        <result column="repNumber" property="repNumber"/>
+        <result column="warTotalValue" property="warTotalValue"/>
+        <result column="warCurrent" property="warCurrent"/>
+        <result column="warLowest" property="warLowest"/>
+    </resultMap>
+</mapper>

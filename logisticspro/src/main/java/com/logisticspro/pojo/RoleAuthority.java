@@ -34,6 +34,11 @@ public class RoleAuthority {
     public RoleAuthority() {
     }
 
+    public RoleAuthority(String roaRoleAuthNo, String roaRolNo, String roaAuthFirstMenuNo) {
+        this.roaRoleAuthNo = roaRoleAuthNo;
+        this.roaRolNo = roaRolNo;
+        this.roaAuthFirstMenuNo = roaAuthFirstMenuNo;
+    }
     public RoleAuthority(String roaRoleAuthNo, String roaRolNo, String roaAuthFirstMenuNo, String roaAuthSecondMenuNo, String roaAuthActionNo, String roaRoleAuthDesc) {
         this.roaRoleAuthNo = roaRoleAuthNo;
         this.roaRolNo = roaRolNo;
@@ -42,6 +47,8 @@ public class RoleAuthority {
         this.roaAuthActionNo = roaAuthActionNo;
         this.roaRoleAuthDesc = roaRoleAuthDesc;
     }
+
+
 
     @Override
     public String toString() {

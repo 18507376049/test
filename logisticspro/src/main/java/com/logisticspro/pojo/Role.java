@@ -1,5 +1,7 @@
 package com.logisticspro.pojo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -19,7 +21,7 @@ public class Role {
    /**
     * 角色创建时间
     */
-   private Date rolCreatetime;
+   private String rolCreatetime;
    /**
     * 角色排序
     */
@@ -40,7 +42,7 @@ public class Role {
    public Role() {
    }
 
-   public Role(String rolNo, String rolName, Date rolCreatetime, int rolOrderNumber, String rolDesc, String rolStatus, String rolAuthoEmployNo) {
+   public Role(String rolNo, String rolName, String rolCreatetime, int rolOrderNumber, String rolDesc, String rolStatus, String rolAuthoEmployNo) {
       this.rolNo = rolNo;
       this.rolName = rolName;
       this.rolCreatetime = rolCreatetime;
@@ -79,11 +81,13 @@ public class Role {
       this.rolName = rolName;
    }
 
-   public Date getRolCreatetime() {
+   public String getRolCreatetime() {
       return rolCreatetime;
    }
 
-   public void setRolCreatetime(Date rolCreatetime) {
+   public void setRolCreatetime(String rolCreatetime) {
+//      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//      String format = sdf.format(rolCreatetime);
       this.rolCreatetime = rolCreatetime;
    }
 
